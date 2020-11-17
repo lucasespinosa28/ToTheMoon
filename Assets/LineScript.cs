@@ -10,9 +10,11 @@ public class LineScript : MonoBehaviour
     // and animates it.
     void Start()
     {
-        var ship = new Player();
-        var enemies = new Obstacles();
-        ship.Add();
-        enemies.Add(5);
+        var Ship = new Player();
+        var Enemies = new Obstacles();
+        var Moon = new Goal();
+        Ship.Add();
+        Enemies.Add(6);
+        Moon.Add();
     }
 }

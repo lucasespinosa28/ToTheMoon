@@ -21,11 +21,12 @@ namespace Assets.Scripts
                         Color2 = MeteorConfig.Color2,
                         WidthMultiplier = MeteorConfig.WidthMultiplier,
                 };
+                //var path = 
                 test.Add(Body, MeteorConfig.Positions2D);     
                 Physics.Add(Body, MeteorConfig.Positions2D);
 
                 Body.transform.parent = Meteor.transform;
-                Body.transform.position = new Vector3(Random.Range(-6.0f,6f), Random.Range(-4.0f, 4.0f),0);
+                Meteor.transform.position = new Vector3(-5+(i*2), 0.00f,0);
             }
 
         }       

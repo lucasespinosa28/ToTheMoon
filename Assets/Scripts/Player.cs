@@ -9,7 +9,7 @@ namespace Assets.Scripts
     {
         public void Add()
         {
-            var Ship = new GameObject("Player");
+            var Player = new GameObject("Player");
             var Body = new GameObject("Ship");
 
             var ShipConfig = new Ship();
@@ -21,8 +21,9 @@ namespace Assets.Scripts
             };
             test.Add(Body, ShipConfig.Positions2D);     
             Physics.Add(Body, ShipConfig.Positions2D);
-
-            Body.transform.parent = Ship.transform;
+            Physics.Add(Player, ShipConfig.Positions2D);
+            Body.AddComponent<ShipHit>();
+            Body.transform.parent = Player.transform;
             Body.transform.position = ShipConfig.StartPosition;
 
         }       
