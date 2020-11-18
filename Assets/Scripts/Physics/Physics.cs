@@ -15,6 +15,10 @@ namespace Assets.Scripts
             {
                 Rigid.constraints = RigidbodyConstraints2D.FreezeAll;
             }
+            if (PhysicsObject.name == "Ship")
+            {
+                PhysicsObject.AddComponent<ConstantForce2D>();
+            }
         }
 
     }

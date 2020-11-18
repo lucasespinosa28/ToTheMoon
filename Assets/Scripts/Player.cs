@@ -7,13 +7,10 @@ namespace Assets.Scripts
 {
     public partial class Objects
     {
-        public void AddPlayer()
+        public static GameObject AddPlayer()
         {
             var Player = new GameObject("Player");
-            var Ship = new GameObject
-            {
-                name = "Ship"
-            };
+            var Ship = new GameObject("Ship");         
             var ShipConfig = new Ship();
            
             var ShipDraw = new Draw()      
@@ -30,6 +27,7 @@ namespace Assets.Scripts
             Ship.AddComponent<ShipHit>();
             Ship.transform.parent = Player.transform;
             Ship.transform.position = ShipConfig.StartPosition;
+            return Ship;
 
         }       
     }

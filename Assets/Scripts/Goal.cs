@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public partial class Objects
     {
-        public void AddGoal()
+        public static GameObject AddGoal()
         {
             var MoonPosition = new GameObject("MoonPosition");
             var Moon = new GameObject("Moon");
@@ -27,6 +27,7 @@ namespace Assets.Scripts
             Moon.transform.parent = MoonPosition.transform;
             MoonPosition.transform.position = MoonConfig.StartPosition;
             MoonPosition.transform.localScale = new Vector3(1.5f, 1.5f, 0.0f);
+            return MoonPosition;
 
         }
     }
