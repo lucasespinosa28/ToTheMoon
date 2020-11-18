@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts;
 
-public class LineScript : MonoBehaviour
+public class Main : MonoBehaviour
 {
     // Start is called before the first frame update
     // Creates a line renderer that follows a Sin() function
     // and animates it.
     void Start()
     {
-        var Ship = new Player();
-        var Enemies = new Obstacles();
-        var Moon = new Goal();
-        Ship.Add();
-        Enemies.Add(6);
-        Moon.Add();
+        var objects = new Objects();
+        objects.AddGoal();
+        objects.AddPlayer();
+        objects.AddObstacles(6);
     }
 }

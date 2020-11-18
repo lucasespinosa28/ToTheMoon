@@ -5,26 +5,31 @@ using Assets.Scripts;
 
 namespace Assets.Scripts
 {
-    public class Player
+    public partial class Objects
     {
-        public void Add()
+        public void AddPlayer()
         {
             var Player = new GameObject("Player");
-            var Body = new GameObject("Ship");
-
-            var ShipConfig = new Ship();
-            var test = new Draw()      
+            var Ship = new GameObject
             {
-                    Color1 = ShipConfig.Color1,
-                    Color2 = ShipConfig.Color2,
-                    WidthMultiplier = ShipConfig.WidthMultiplier,
+                name = "Ship"
             };
-            test.Add(Body, ShipConfig.Positions2D);     
-            Physics.Add(Body, ShipConfig.Positions2D);
-            Physics.Add(Player, ShipConfig.Positions2D);
-            Body.AddComponent<ShipHit>();
-            Body.transform.parent = Player.transform;
-            Body.transform.position = ShipConfig.StartPosition;
+            var ShipConfig = new Ship();
+           
+            var ShipDraw = new Draw()      
+            {
+                Color1 = ShipConfig.Color1,
+                Color2 = ShipConfig.Color2,
+                WidthMultiplier = ShipConfig.WidthMultiplier,
+            };
+            ShipDraw.AddLines(Ship, ShipConfig.Positions2D);
+
+            var ShipPhysics = new Physics(Ship);
+            ShipPhysics.PolygonCollider(Ship, ShipConfig.Positions2D);
+
+            Ship.AddComponent<ShipHit>();
+            Ship.transform.parent = Player.transform;
+            Ship.transform.position = ShipConfig.StartPosition;
 
         }       
     }

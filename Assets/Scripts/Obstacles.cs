@@ -5,28 +5,30 @@ using Assets.Scripts;
 
 namespace Assets.Scripts
 {
-    public class Obstacles
+    public partial class Objects
     {
-        public void Add(int quantity)
+        public void AddObstacles(int quantity)
         {
             for (int i = 0; i < quantity; i++)
             {
-                var Meteor = new GameObject("Obstacles" + i);
-                var Body = new GameObject("Meteor" + i);
+                var MeteorPosition = new GameObject("Obstacles" + i);
+                var Meteor = new GameObject("Meteor" + i);
 
                 var MeteorConfig = new Meteor();
-                var test = new Draw()      
+                var DrawObstacles = new Draw()      
                 {
                         Color1 = MeteorConfig.Color1,
                         Color2 = MeteorConfig.Color2,
                         WidthMultiplier = MeteorConfig.WidthMultiplier,
                 };
-                //var path = 
-                test.Add(Body, MeteorConfig.Positions2D);     
-                Physics.Add(Body, MeteorConfig.Positions2D);
+                DrawObstacles.AddLines(Meteor, MeteorConfig.Positions2D);
 
-                Body.transform.parent = Meteor.transform;
-                Meteor.transform.position = new Vector3(-5+(i*2), 0.00f,0);
+                var MeteorPhysics = new Physics(Meteor);
+                MeteorPhysics.PolygonCollider(Meteor,MeteorConfig.Positions2D);
+
+
+                Meteor.transform.parent = MeteorPosition.transform;
+                MeteorPosition.transform.position = new Vector3(-5+(i*2), 0.00f,0);
             }
 
         }       
