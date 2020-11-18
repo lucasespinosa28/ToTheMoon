@@ -15,8 +15,8 @@ namespace Assets.Scripts
            
             var ShipDraw = new Draw()      
             {
-                Color1 = ShipConfig.Color1,
-                Color2 = ShipConfig.Color2,
+                Color1 = ShipConfig.ShipColor1,
+                Color2 = ShipConfig.ShipColor2,
                 WidthMultiplier = ShipConfig.WidthMultiplier,
             };
             ShipDraw.AddLines(Ship, ShipConfig.Positions2D);
@@ -24,7 +24,7 @@ namespace Assets.Scripts
             var ShipPhysics = new Physics(Ship);
             ShipPhysics.PolygonCollider(Ship, ShipConfig.Positions2D);
 
-            Ship.AddComponent<ShipHit>();
+            Ship.AddComponent<ShipMove>();
             Ship.transform.parent = Player.transform;
             Ship.transform.position = ShipConfig.StartPosition;
             return Ship;

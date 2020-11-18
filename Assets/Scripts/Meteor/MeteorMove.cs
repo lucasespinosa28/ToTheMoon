@@ -11,17 +11,16 @@ public class MeteorMove : MonoBehaviour
         Speed = Random.Range(-0.05f, 0.05f);
     }
     void Update()
-    {   
-       
-            if (transform.position.y > 6.15)
-            {
-               transform.position = new Vector3(transform.position.x, -6.00f, 0.0f);
-            }
-            if (transform.position.y < -6.15)
-            {
-                transform.position = new Vector3(transform.position.x, 6.00f, 0.0f);
-            }
-            transform.Translate(0, Speed, 0f);
+    {       
+        if (transform.position.y > 6.15)
+        {
+            transform.position = new Vector3(transform.position.x, -6.00f, 0.0f);
+        }
+        if (transform.position.y < -6.15)
+        {
+            transform.position = new Vector3(transform.position.x, 6.00f, 0.0f);
+        }
+        transform.Translate(0, Speed, 0f);
     }
 
 }

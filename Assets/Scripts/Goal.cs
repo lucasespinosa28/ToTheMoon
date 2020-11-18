@@ -15,8 +15,8 @@ namespace Assets.Scripts
             var MoonConfig = new Moon();
             var DrawMoon = new Draw()
             {
-                Color1 = MoonConfig.Color1,
-                Color2 = MoonConfig.Color2,
+                Color1 = MoonConfig.MoonColor1,
+                Color2 = MoonConfig.MoonColor2,
                 WidthMultiplier = MoonConfig.WidthMultiplier,
             };
             DrawMoon.AddLines(Moon, MoonConfig.Positions2D);

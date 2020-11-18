@@ -18,10 +18,11 @@ public class Main : MonoBehaviour
     {
         Test1 = 5.5f;
         Test2 = -5.5f;
-        NumberOfObstacle = 9;
-        Moon = Objects.AddGoal();
-        Ship = Objects.AddPlayer();
-        Objects.AddObstacles(NumberOfObstacle);
+        //NumberOfObstacle = 9;
+        new Moon().Add();
+        new Ship().Add();
+     
+        //Objects.AddObstacles(NumberOfObstacle);
         //for (int l = 0; l < 2; l++)
         //{
         //    for (int i = 0; i < NumberOfObstacle; i++)
@@ -42,36 +43,36 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyUp("space"))
-        {
-            Ship.GetComponent<ConstantForce2D>().force = new Vector2(10, 0);
-        }
-        if (Ship.transform.position.y > 6.15)
-        {
-            Ship.transform.position = new Vector3(Ship.transform.position.x, -6.15f, 0.0f);
-        }
-        else if (Ship.transform.position.y < -6.15) 
-        {
-            Ship.transform.position = new Vector3(Ship.transform.position.x, 6.15f, 0.0f);
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            float atualPossitionY = Ship.transform.position.y;
-            Debug.Log("Up");
-            Ship.transform.Translate(0, Time.deltaTime * 15, 0f);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            float atualPossitionY = Ship.transform.position.y;
-            Debug.Log("Down");
-            Ship.transform.Translate(0, -Time.deltaTime * 15, 0f); 
-        }
+        //if (Input.GetKeyUp("space"))
+        //{
+        //    Ship.GetComponent<ConstantForce2D>().force = new Vector2(10, 0);
+        //}
+        //if (Ship.transform.position.y > 6.15)
+        //{
+        //    Ship.transform.position = new Vector3(Ship.transform.position.x, -6.15f, 0.0f);
+        //}
+        //else if (Ship.transform.position.y < -6.15) 
+        //{
+        //    Ship.transform.position = new Vector3(Ship.transform.position.x, 6.15f, 0.0f);
+        //}
+        //if (Input.GetKey(KeyCode.UpArrow))
+        //{
+        //    float atualPossitionY = Ship.transform.position.y;
+        //    Debug.Log("Up");
+        //    Ship.transform.Translate(0, Time.deltaTime * 15, 0f);
+        //}
+        //if (Input.GetKey(KeyCode.DownArrow))
+        //{
+        //    float atualPossitionY = Ship.transform.position.y;
+        //    Debug.Log("Down");
+        //    Ship.transform.Translate(0, -Time.deltaTime * 15, 0f); 
+        //}
 
-        Moon.transform.Translate(Vector3.up * Time.deltaTime);
-        if (Moon.transform.position.y > 7.5)
-        {
-            Moon.transform.position = new Vector3(Moon.transform.position.x, -7.5f, 0.0f);
-        }
+        //Moon.transform.Translate(Vector3.up * Time.deltaTime);
+        //if (Moon.transform.position.y > 7.5)
+        //{
+        //    Moon.transform.position = new Vector3(Moon.transform.position.x, -7.5f, 0.0f);
+        //}
     }
 }
 

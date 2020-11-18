@@ -22,6 +22,10 @@ namespace Assets.Scripts
             {
                 Lines.SetPosition(i, new Vector3(Positions2D[i].Item2, Positions2D[i].Item3, 0.00f));
             }
+            if (DrawObject.name.Contains("Meteor"))
+            {
+                Lines.numCornerVertices = 7;
+            }
             
         }
     }

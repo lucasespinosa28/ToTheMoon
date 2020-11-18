@@ -19,7 +19,7 @@ namespace Assets.Scripts
             (8,1.00f,-1.00f),
         };
         public float WidthMultiplier { get; set; } = 0.1f;
-        public Color Color1 { get; set; } = Color.gray;
-        public Color Color2 { get; set; } = Color.yellow;
+        public Color MoonColor1 { get; set; } = Color.gray;
+        public Color MoonColor2 { get; set; } = Color.white;
     }
 }
