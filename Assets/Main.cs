@@ -12,5 +12,6 @@ public class Main : MonoBehaviour
     {
         new Moon();
         new Ship();
+        new Background();
     }
 }

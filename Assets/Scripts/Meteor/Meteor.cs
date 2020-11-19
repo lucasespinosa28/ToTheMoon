@@ -16,9 +16,9 @@ namespace Assets.Scripts
 
                 var MeteorColor = new Configurationlines()
                 {
-                    Color1 = Color.cyan,
-                    Color2 = Color.red,
-                    WidthMultiplier = 0.05f
+                    Color1 = Color.yellow,
+                    Color2 = Color.yellow,
+                    WidthMultiplier = 0.10f
                 };
                 Lines(Meteor, Positions2D(), MeteorColor);
                 Physics(Meteor, Positions2D());

@@ -12,15 +12,19 @@ namespace Assets.Scripts
             public Color Color1;
             public Color Color2;   
         }
-        
-        public void Lines(GameObject DrawObject, List<(int, float, float)> Positions2D, Configurationlines config)
+
+        public void Lines(GameObject DrawObject, List<(int, float, float)> Positions2D, Configurationlines config, bool loop = true,float alpha = 1.0f)
         {
             var Lines = DrawObject.AddComponent<LineRenderer>();
             Lines.material = new Material(Shader.Find("Sprites/Default"));
             Lines.widthMultiplier = config.WidthMultiplier;
             Lines.useWorldSpace = false;
-            Lines.colorGradient = Utils.Gradient(config.Color1, config.Color2);
-            Lines.loop = true;
+            Lines.colorGradient = Utils.Gradient(config.Color1, config.Color2, loop, alpha);
+            if (!DrawObject.name.Contains("Lines"))
+            {
+                Lines.loop = true;
+
+            }
             Lines.positionCount = Positions2D.Count;
             for (int i = 0; i < Positions2D.Count; i++)
             {

@@ -12,6 +12,7 @@ namespace Assets.Scripts
             ship.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             ship.transform.rotation = Quaternion.identity;
             ship.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            ship.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.white, Color.cyan);
         }
     }
 }

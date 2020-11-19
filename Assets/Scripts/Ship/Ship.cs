@@ -15,7 +15,7 @@ namespace Assets.Scripts
             {
                 Color1 = Color.white,
                 Color2 = Color.cyan,
-                WidthMultiplier = 0.05f
+                WidthMultiplier = 0.10f
             };
 
             Lines(Ship, Positions2D, config);

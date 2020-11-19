@@ -13,8 +13,8 @@ namespace Assets.Scripts
             var config = new Configurationlines()
             {
                 Color1 = Color.white,
-                Color2 = Color.black,
-                WidthMultiplier = 0.040f
+                Color2 = Color.yellow,
+                WidthMultiplier = 0.12f
             };
 
             Lines(Moon, Positions2D, config);
