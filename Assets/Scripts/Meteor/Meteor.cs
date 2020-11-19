@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public partial class Meteor
+    public partial class Meteor : CreateComponent
     {
         public void Add(int quantity)
         {
@@ -13,18 +13,15 @@ namespace Assets.Scripts
                 var MeteorPosition = new GameObject("Obstacles" + i);
                 var Meteor = new GameObject("Meteor" + i);
 
-                var MeteorConfig = new Meteor();
-                var DrawObstacles = new Draw()
+
+                var MeteorColor = new Configurationlines()
                 {
                     Color1 = Color.cyan,
                     Color2 = Color.red,
-                    WidthMultiplier = MeteorConfig.WidthMultiplier,
+                    WidthMultiplier = 0.05f
                 };
-                var metoerLins = Positions2D();
-                DrawObstacles.AddLines(Meteor, metoerLins);
-
-                var MeteorPhysics = new Physics(Meteor);
-                MeteorPhysics.PolygonCollider(Meteor, metoerLins);
+                Lines(Meteor, Positions2D(), MeteorColor);
+                Physics(Meteor, Positions2D());
 
                 MeteorPosition.AddComponent<MeteorMove>();
                 Meteor.transform.parent = MeteorPosition.transform;

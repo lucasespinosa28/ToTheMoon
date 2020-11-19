@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class ShipMove : MonoBehaviour
 {
-    private int Score = 1;
+    private int Score;
     public Quaternion originalRotationValue;
     public bool newMeteor;
     public bool hitMoon;
     public bool hitMeteor;
-    public float timeLeft = 2.0f;
-    private bool Lunch = true; 
+    public float timeLeft;
+    private bool Lunch; 
     private void Awake()
     {
+        timeLeft = 2.0f;
+        Lunch = true;
+        Score = 1;
         newMeteor = true;
         hitMeteor = false;
         hitMoon = false;
@@ -21,7 +24,7 @@ public class ShipMove : MonoBehaviour
     {
         if (newMeteor)
         {
-            new Meteor().Add(9);
+            new Meteor().Add(7);
             newMeteor = false;
         }
         if (hitMeteor)
@@ -29,7 +32,8 @@ public class ShipMove : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)
             {
-                ResetShip(gameObject);
+                Ship.Reset(gameObject);
+                Moon.Reset();
                 for (int i = 0; i < 9; i++)
                 {
                     ResetMeteor(GameObject.Find($"Obstacles{i}"));
@@ -48,8 +52,8 @@ public class ShipMove : MonoBehaviour
             timeLeft -= Time.deltaTime * 100;
             if (timeLeft < 0)
             {
-                ResetShip(gameObject);
-                GameObject.Find("MoonPosition").transform.position = new Vector3(8.25f, 0.00f, 00f);
+                Ship.Reset(gameObject);
+                Moon.Reset();
                 hitMoon = false;
                 for (int i = 0; i < 9; i++)
                 {
@@ -121,7 +125,7 @@ public class ShipMove : MonoBehaviour
         ship.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         ship.transform.rotation = Quaternion.identity;
         ship.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        GameObject.Find("MoonPosition").transform.position = new Vector3(7.50f, 0.00f, 00f);
+       
         
     }
     private static void ResetMeteor(GameObject meteor)

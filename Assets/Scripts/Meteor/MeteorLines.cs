@@ -6,8 +6,6 @@ namespace Assets.Scripts
 {
     public partial class Meteor
     {
-        public float WidthMultiplier { get; set; } = 0.040f;
-        public int PositionCount { get; set; }
         public List<(int, float, float)> Positions2D()
         { 
             int index = 0;

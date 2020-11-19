@@ -3,31 +3,33 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public partial class Moon
+    public partial class Moon : CreateComponent
     {
-        public Vector3 StartPosition { get; set; } = new Vector3(8.25f, 0.00f, 00f);
-        public GameObject Add()
+        public static Vector3 StartPosition { get; set; } = new Vector3(8.25f, 0.00f, 00f);
+        public Moon()
         {
             var MoonPosition = new GameObject("MoonPosition");
             var Moon = new GameObject("Moon");
-
-            var DrawMoon = new Draw()
+            var config = new Configurationlines()
             {
-                Color1 = MoonColor1,
-                Color2 = MoonColor2,
-                WidthMultiplier = WidthMultiplier,
+                Color1 = Color.white,
+                Color2 = Color.black,
+                WidthMultiplier = 0.040f
             };
-            DrawMoon.AddLines(Moon, Positions2D);
 
-            var MeteorPhysics = new Physics(Moon);
-            MeteorPhysics.PolygonCollider(Moon, Positions2D);
+            Lines(Moon, Positions2D, config);
+            Physics(Moon, Positions2D);
 
             Moon.transform.parent = MoonPosition.transform;
             MoonPosition.AddComponent<MoonMove>();
             MoonPosition.transform.position = StartPosition;
             MoonPosition.transform.localScale = new Vector3(1.5f, 1.5f, 0.0f);
-            return MoonPosition;
-
         }
+        //public GameObject Add()
+        //{
+            
+        //    return MoonPosition;
+
+        //}
     }
 }
