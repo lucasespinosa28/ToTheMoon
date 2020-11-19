@@ -9,6 +9,7 @@ public class ShipMove : MonoBehaviour
     public bool hitMoon;
     public bool hitMeteor;
     public float timeLeft = 2.0f;
+    private bool Lunch = true; 
     private void Awake()
     {
         newMeteor = true;
@@ -35,6 +36,7 @@ public class ShipMove : MonoBehaviour
                 }
                 hitMeteor = false;
                 newMeteor = true;
+                Lunch = true;
                 timeLeft = 2.0f;
                 GameObject.Find("Score").GetComponent<TextMesh>().text = $"STAGE {Score}";
             }
@@ -56,6 +58,7 @@ public class ShipMove : MonoBehaviour
                 Score++;
                 GameObject.Find("Score").GetComponent<TextMesh>().text = $"STAGE {Score}";
                 newMeteor = true;
+                Lunch = true;
                 timeLeft = 2.0f;
             }
 
@@ -65,14 +68,19 @@ public class ShipMove : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             GetComponent<ConstantForce2D>().force = new Vector2(10, 0);
+            Lunch = false;
         }
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        if (Lunch)
         {
-            transform.Translate(0, Time.deltaTime * 15, 0f);
-        }
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(0, -Time.deltaTime * 15, 0f);
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            {
+                transform.Translate(0, Time.deltaTime * 15, 0f);
+              
+            }
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            {
+                transform.Translate(0, -Time.deltaTime * 15, 0f);
+            }
         }
 
         if (transform.position.y > 6.15)
@@ -113,7 +121,8 @@ public class ShipMove : MonoBehaviour
         ship.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         ship.transform.rotation = Quaternion.identity;
         ship.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        GameObject.Find("MoonPosition").transform.position = new Vector3(7.50f, 0.00f, 00f); 
+        GameObject.Find("MoonPosition").transform.position = new Vector3(7.50f, 0.00f, 00f);
+        
     }
     private static void ResetMeteor(GameObject meteor)
     {
