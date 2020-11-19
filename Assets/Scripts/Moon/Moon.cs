@@ -5,7 +5,7 @@ namespace Assets.Scripts
 {
     public partial class Moon
     {
-        public Vector3 StartPosition { get; set; } = new Vector3(7.50f, 0.00f, 00f);
+        public Vector3 StartPosition { get; set; } = new Vector3(8.25f, 0.00f, 00f);
         public GameObject Add()
         {
             var MoonPosition = new GameObject("MoonPosition");

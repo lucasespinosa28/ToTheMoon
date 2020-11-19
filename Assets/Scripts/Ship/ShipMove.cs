@@ -14,7 +14,7 @@ public class ShipMove : MonoBehaviour
         newMeteor = true;
         hitMeteor = false;
         hitMoon = false;
-        GameObject.Find("Score").GetComponent<TextMesh>().text = "$STAGE {Score}";
+        GameObject.Find("Score").GetComponent<TextMesh>().text = $"STAGE {Score}";
     }
     void Update()
     {
@@ -47,7 +47,7 @@ public class ShipMove : MonoBehaviour
             if (timeLeft < 0)
             {
                 ResetShip(gameObject);
-                GameObject.Find("MoonPosition").transform.position = new Vector3(7.50f, 0.00f, 00f);
+                GameObject.Find("MoonPosition").transform.position = new Vector3(8.25f, 0.00f, 00f);
                 hitMoon = false;
                 for (int i = 0; i < 9; i++)
                 {
@@ -83,6 +83,12 @@ public class ShipMove : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 6.15f, 0.0f);
         }
+        if (transform.position.x > 10f) 
+        { 
+            Score = 0;
+            GameObject.Find("Score").GetComponent<TextMesh>().text = "GAMEOVER";
+            hitMeteor = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -107,6 +113,7 @@ public class ShipMove : MonoBehaviour
         ship.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         ship.transform.rotation = Quaternion.identity;
         ship.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        GameObject.Find("MoonPosition").transform.position = new Vector3(7.50f, 0.00f, 00f); 
     }
     private static void ResetMeteor(GameObject meteor)
     {

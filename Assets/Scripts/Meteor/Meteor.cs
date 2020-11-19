@@ -28,7 +28,7 @@ namespace Assets.Scripts
 
                 MeteorPosition.AddComponent<MeteorMove>();
                 Meteor.transform.parent = MeteorPosition.transform;
-                MeteorPosition.transform.position = new Vector3(-5 + (i), Random.Range(-3, 4), 0);
+                MeteorPosition.transform.position = new Vector3(-4 + (i), Random.Range(-3, 4), 0);
             }
         }
     }
