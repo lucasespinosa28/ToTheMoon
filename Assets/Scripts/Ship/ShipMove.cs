@@ -5,25 +5,23 @@ public class ShipMove : MonoBehaviour
 {
     private int Score;
     public Quaternion originalRotationValue;
-    public bool newMeteor;
-    public bool hitMoon;
-    public bool hitMeteor;
+    public bool newMeteor, hitMoon, hitMeteor, launchable;
     public float timeLeft;
-    private bool Lunch; 
     private void Awake()
     {
         timeLeft = 2.0f;
-        Lunch = true;
+        launchable = true;
         Score = 1;
         newMeteor = true;
         hitMeteor = false;
         hitMoon = false;
-        GameObject.Find("Score").GetComponent<TextMesh>().text = $"STAGE {Score}";
+        GameObject.Find("ScoreText").GetComponent<TextMesh>().text = $"STAGE {Score}";
     }
     void Update()
     {
         if (newMeteor)
         {
+            new Moon();
             new Meteor().Add(Score);
             newMeteor = false;
         }
@@ -33,78 +31,51 @@ public class ShipMove : MonoBehaviour
             if (timeLeft < 0)
             {
                 Ship.Reset(gameObject);
-                Moon.Reset();
                 for (int i = 0; i < Score; i++)
                 {
                     ResetMeteor(GameObject.Find($"Obstacles{i}"));
                 }
                 hitMeteor = false;
                 newMeteor = true;
-                Lunch = true;
+                launchable = true;
                 timeLeft = 2.0f;
-                GameObject.Find("Score").GetComponent<TextMesh>().text = $"STAGE {Score}";
-                GameObject.Find("Score").GetComponent<TextMesh>().color = Color.white;
+                Destroy(GameObject.Find("MoonPosition"));
+                ScoreText.Reset();
             }
            
         }
         if (hitMoon)
         {
     
-            timeLeft -= Time.deltaTime;
+            timeLeft -= Time.deltaTime * 5;
           
             if (timeLeft < 0)
             {
                 Ship.Reset(gameObject);
-                Moon.Reset();
                 hitMoon = false;
                 for (int i = 0; i < Score; i++)
                 {
                     ResetMeteor(GameObject.Find($"Obstacles{i}"));
                 }
-                Score++;
-                GameObject.Find("Score").GetComponent<TextMesh>().text = $"STAGE {Score}";
-                GameObject.Find("Score").GetComponent<TextMesh>().color = Color.white;
                 newMeteor = true;
-                Lunch = true;
+                launchable = true;
+                Destroy(GameObject.Find("MoonPosition"));
+                ScoreText.UpdateScore(ref Score);
                 timeLeft = 2.0f;
             }
 
         }
-       
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            GetComponent<ConstantForce2D>().force = new Vector2(10, 0);
-            Lunch = false;
-        }
-        if (Lunch)
-        {
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            {
-                transform.Translate(0, Time.deltaTime * 15, 0f);
-              
-            }
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-            {
-                transform.Translate(0, -Time.deltaTime * 15, 0f);
-            }
-        }
+        bool SpaceKey = Input.GetKeyUp(KeyCode.Space);
+        Ship.Lunch(SpaceKey,gameObject, ref launchable);
 
-        if (transform.position.y > 6.15)
-        {
-            transform.position = new Vector3(transform.position.x, -6.15f, 0.0f);
-        }
-        else if (transform.position.y < -6.15)
-        {
-            transform.position = new Vector3(transform.position.x, 6.15f, 0.0f);
-        }
-        if (transform.position.x > 10f) 
-        { 
-            Score = 0;
-            GameObject.Find("Score").GetComponent<TextMesh>().text = "GAMEOVER";
-            GameObject.Find("Score").GetComponent<TextMesh>().color = Color.red;
-            hitMeteor = true;
-        }
+        bool UpKey = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W);
+        Ship.Control.Up(UpKey, gameObject, ref launchable);
+
+        bool DownKey = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
+        Ship.Control.Down(DownKey, gameObject, ref launchable);
+        Ship.OffScreen(gameObject,ref hitMeteor,ref hitMeteor,ref Score);
+        
+       
     }
     private void OnTriggerExit2D(Collider2D hitedGameObjecto)
     {
@@ -113,8 +84,7 @@ public class ShipMove : MonoBehaviour
             gameObject.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.red, Color.red);
             hitedGameObjecto.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.red, Color.red);
             Score = 0;
-            GameObject.Find("Score").GetComponent<TextMesh>().text = "GAMEOVER";
-            GameObject.Find("Score").GetComponent<TextMesh>().color = Color.red;
+            ScoreText.GameOver(ref Score);
             hitMeteor = true;
         }
     }
@@ -124,8 +94,9 @@ public class ShipMove : MonoBehaviour
         {
             if (!hitMeteor)
             {
-                Debug.Log("hit moon");
+                Debug.Log("hit moon");             
                 gameObject.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.green, Color.green);
+                hitedGameObjecto.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.green, Color.green);
                 hitMoon = true;
             }
         }

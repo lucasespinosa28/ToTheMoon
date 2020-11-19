@@ -10,7 +10,6 @@ public class Main : MonoBehaviour
     // and animates it.
     void Start()
     {
-        new Moon();
         new Ship();
         new Background();
     }

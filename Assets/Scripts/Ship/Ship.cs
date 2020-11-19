@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public partial class Ship : CreateComponent
     {
-        public Vector3 StartPosition { get; set; } = new Vector3(-7.50f, 0.00f, 00f);
+        public Vector3 StartPosition { get; set; } = new Vector3(-7.00f, 0.00f, 00f);
 
         public Ship()
         {
@@ -13,7 +13,7 @@ namespace Assets.Scripts
 
             var config = new Configurationlines()
             {
-                Color1 = Color.white,
+                Color1 = Color.cyan,
                 Color2 = Color.cyan,
                 WidthMultiplier = 0.10f
             };

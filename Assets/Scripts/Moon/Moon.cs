@@ -14,7 +14,7 @@ namespace Assets.Scripts
             {
                 Color1 = Color.white,
                 Color2 = Color.yellow,
-                WidthMultiplier = 0.12f
+                WidthMultiplier = 0.15f
             };
 
             Lines(Moon, Positions2D, config);
