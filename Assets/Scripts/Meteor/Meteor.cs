@@ -6,27 +6,44 @@ namespace Assets.Scripts
 {
     public partial class Meteor : CreateComponent
     {
-        public void Add(int quantity)
+        public void AddLegacy(int Id)
         {
-            for (int i = 0; i < quantity; i++)
+            var MeteorPosition = new GameObject("Obstacles" + Id);
+            var Meteor = new GameObject("Meteor" + Id);
+
+            var MeteorColor = new Configurationlines()
             {
-                var MeteorPosition = new GameObject("Obstacles" + i);
-                var Meteor = new GameObject("Meteor" + i);
+                Color1 = Color.yellow,
+                Color2 = Color.yellow,
+                WidthMultiplier = 0.10f
+            };
+            Lines(Meteor, Positions2D(), MeteorColor);
+            Physics(Meteor, Positions2D());
 
+            MeteorPosition.AddComponent<MeteorMove>();
+            Meteor.transform.parent = MeteorPosition.transform;
+            MeteorPosition.transform.position = new Vector3(-4 + (Id*1.8f), Random.Range(-3, 4), 0);
+            
+        }
+        public void Add(int Id, Vector3 StartPosition)
+        {
+            var MeteorPosition = new GameObject("Obstacles" + Id);
+            var Meteor = new GameObject("Meteor" + Id);
 
-                var MeteorColor = new Configurationlines()
-                {
-                    Color1 = Color.yellow,
-                    Color2 = Color.yellow,
-                    WidthMultiplier = 0.10f
-                };
-                Lines(Meteor, Positions2D(), MeteorColor);
-                Physics(Meteor, Positions2D());
+            var MeteorColor = new Configurationlines()
+            {
+                Color1 = Color.yellow,
+                Color2 = Color.yellow,
+                WidthMultiplier = 0.10f
+            };
+            Lines(Meteor, Positions2D(), MeteorColor);
+            Physics(Meteor, Positions2D());
 
-                MeteorPosition.AddComponent<MeteorMove>();
-                Meteor.transform.parent = MeteorPosition.transform;
-                MeteorPosition.transform.position = new Vector3(-4 + (i), Random.Range(-3, 4), 0);
-            }
+            MeteorPosition.AddComponent<MeteorMove>();
+            Transform transform = MeteorPosition.transform;
+            Meteor.transform.parent = transform;
+            transform.position = StartPosition;
+
         }
     }
 }
