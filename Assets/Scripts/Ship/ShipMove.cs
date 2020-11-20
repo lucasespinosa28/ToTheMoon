@@ -11,7 +11,7 @@ public class ShipMove : MonoBehaviour
     {
         timeLeft = 2.0f;
         launchable = true;
-        Score = 60;
+        Score = 1;
         newMeteor = true;
         hitMeteor = false;
         hitMoon = false;
@@ -26,7 +26,7 @@ void Update()
         {
                 new Moon();
             
-                Stages.level(Score);
+                Stages.Level(Score);
                // new Meteor().AddLegacy(i);
 
             newMeteor = false;
@@ -39,8 +39,7 @@ void Update()
                 Ship.Reset(gameObject);
                 for (int i = 0; i < 10; i++)
                 {
-                    Debug.Log($"loop {i}");
-                    ResetMeteor(GameObject.Find($"Obstacles{i}"));
+                    ResetMeteor();
                 }
                 hitMeteor = false;
                 newMeteor = true;
@@ -60,11 +59,9 @@ void Update()
             {
                 Ship.Reset(gameObject);
                 hitMoon = false;
-                for (int i = 0; i < 10; i++)
-                {
-                    Debug.Log($"loop {i}");
-                    ResetMeteor(GameObject.Find($"Obstacles{i}"));
-                }
+                
+                    ResetMeteor();
+                
                 newMeteor = true;
                 launchable = true;
                 Destroy(GameObject.Find("MoonPosition"));
@@ -109,8 +106,11 @@ void Update()
             }
         }
     }
-    private static void ResetMeteor(GameObject meteor)
+    private static void ResetMeteor()
     {
-        Destroy(meteor);
+        for (int i = 0; i < 10; i++)
+        {
+            Destroy(GameObject.Find($"Meteor{i}"));
+        }
     }
 }

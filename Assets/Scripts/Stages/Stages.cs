@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public class Stages
     {
-        public static void level(int n)
+        public static void Level(int n)
         {
             switch (n)
             {

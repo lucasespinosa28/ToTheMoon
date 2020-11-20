@@ -8,7 +8,6 @@ namespace Assets.Scripts
 
         public Ship()
         {
-            var Player = new GameObject("Player");
             var Ship = new GameObject("Ship");
 
             var config = new Configurationlines()
@@ -22,7 +21,6 @@ namespace Assets.Scripts
             Physics(Ship, Positions2D);
 
             Ship.AddComponent<ShipMove>();
-            Ship.transform.parent = Player.transform;
             Ship.transform.position = StartPosition;
         }
         //public  GameObject Add()

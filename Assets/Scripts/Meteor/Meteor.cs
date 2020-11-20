@@ -8,7 +8,6 @@ namespace Assets.Scripts
     {
         public void AddLegacy(int Id)
         {
-            var MeteorPosition = new GameObject("Obstacles" + Id);
             var Meteor = new GameObject("Meteor" + Id);
 
             var MeteorColor = new Configurationlines()
@@ -20,14 +19,11 @@ namespace Assets.Scripts
             Lines(Meteor, Positions2D(), MeteorColor);
             Physics(Meteor, Positions2D());
 
-            MeteorPosition.AddComponent<MeteorMove>();
-            Meteor.transform.parent = MeteorPosition.transform;
-            MeteorPosition.transform.position = new Vector3(-4 + (Id*1.8f), Random.Range(-3, 4), 0);
+            Meteor.AddComponent<MeteorMove>();
             
         }
         public void Add(int Id, Vector3 StartPosition)
         {
-            var MeteorPosition = new GameObject("Obstacles" + Id);
             var Meteor = new GameObject("Meteor" + Id);
 
             var MeteorColor = new Configurationlines()
@@ -39,10 +35,8 @@ namespace Assets.Scripts
             Lines(Meteor, Positions2D(), MeteorColor);
             Physics(Meteor, Positions2D());
 
-            MeteorPosition.AddComponent<MeteorMove>();
-            Transform transform = MeteorPosition.transform;
-            Meteor.transform.parent = transform;
-            transform.position = StartPosition;
+            Meteor.AddComponent<MeteorMove>();
+            Meteor.transform.position = StartPosition;
 
         }
     }
