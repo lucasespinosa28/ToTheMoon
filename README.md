@@ -5,3 +5,5 @@
  
  ### all graphics in that game is created using only code
  ![alt text](https://github.com/lucasespinosa28/ToTheMoon/blob/main/docs/Images/hIerarchy.PNG)
+
+ [Music:8-bit Music by TheDeadRat (itch.io)](https://thedeadrat.itch.io/8-bit-music)
