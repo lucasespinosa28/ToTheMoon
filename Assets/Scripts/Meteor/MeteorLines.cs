@@ -6,16 +6,15 @@ namespace Assets.Scripts
 {
     public partial class Meteor
     {
-        public List<(int, float, float)> Positions2D()
+        public List<(float, float)> Positions2D()
         { 
-            int index = 0;
             var side = new Side();
-            var Positions2D  = new List<(int, float, float)>();
+            var Positions2D  = new List<(float, float)>();
 
-            Positions2D.AddRange(side.Bottom(index));
-            Positions2D.Add(side.Right(index));
-            Positions2D.AddRange(side.Top(index));
-            Positions2D.Add(side.Left(index));
+            Positions2D.AddRange(side.Bottom());
+            Positions2D.Add(side.Right());
+            Positions2D.AddRange(side.Top());
+            Positions2D.Add(side.Left());
             return Positions2D;
         }
     }

@@ -9,7 +9,7 @@ namespace Assets.Scripts
             switch (n)
             {
                 case 1:
-                    new Meteor().Add(1, new Vector3(Random.Range(-6.0f, 7.00f), Random.Range(-4.0f, 5.50f)));
+                    new Meteor().Add(1, new Vector3(Random.Range(-5.0f, 7.00f), Random.Range(-4.0f, 5.50f)));
                     break;
                 case 2:
                     new Meteor().Add(1, new Vector3(Random.Range(-5.0f, -1.00f), Random.Range(-4.0f, 5.50f)));

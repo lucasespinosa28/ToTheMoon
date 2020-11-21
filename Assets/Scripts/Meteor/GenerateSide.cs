@@ -9,32 +9,32 @@ namespace Assets.Scripts
     {
         public class Side
         {
-            public List<(int, float, float)> Bottom(int index)
+            public List<(float, float)> Bottom()
             {
-                return new List<(int, float, float)>
+                return new List<( float, float)>
                 {
-                    (++index,0.00f,0.00f),
-                    (++index, Rnd(0.25f, 0.75f), Rnd(0.00f, -0.30f)),
-                    (++index,1.00f,0.00f)
+                    (0.00f,0.00f),
+                    ( Rnd(0.25f, 0.75f), Rnd(0.00f, -0.30f)),
+                    (1.00f,0.00f)
                 };
             }
-            public (int, float, float) Right(int index)
+            public ( float, float) Right()
             {
-                // return (++index, 1.00f, 0.50f);
-                return (++index, Rnd(1.00f, 1.30f), Rnd(0.25f, 0.75f));
+                // return ( 1.00f, 0.50f);
+                return ( Rnd(1.00f, 1.30f), Rnd(0.25f, 0.75f));
             }
-            public List<(int, float, float)> Top(int index)
+            public List<( float, float)> Top()
             {
-                return new List<(int, float, float)>
+                return new List<( float, float)>
                 {
-                    (++index,1.00f,1.00f),
-                    (++index, Rnd(0.25f, 0.75f), Rnd(1.00f, 1.30f)),
-                    (++index,0.00f,1.00f)
+                    (1.00f,1.00f),
+                    ( Rnd(0.25f, 0.75f), Rnd(1.00f, 1.30f)),
+                    (0.00f,1.00f)
                 };
             }
-            public (int, float, float) Left(int index)
+            public ( float, float) Left()
             {
-                return (++index, Rnd(0.00f, -0.30f), Rnd(0.25f, 0.75f));
+                return ( Rnd(0.00f, -0.30f), Rnd(0.25f, 0.75f));
             }
         }
 

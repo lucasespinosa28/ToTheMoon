@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public partial class CreateComponent
     {
-        public void Physics(GameObject PhysicsObject, List<(int, float, float)> Positions2D)
+        public void Physics(GameObject PhysicsObject, List<(float, float)> Positions2D)
         {
             var Rigid = PhysicsObject.AddComponent<Rigidbody2D>();
             Rigid.gravityScale = 0;
@@ -23,13 +23,13 @@ namespace Assets.Scripts
             PolygonCollider(PhysicsObject,Positions2D);
         }
 
-        private void PolygonCollider(GameObject PhysicsObject, List<(int, float, float)> Positions2D)
+        private void PolygonCollider(GameObject PhysicsObject, List<(float, float)> Positions2D)
         {
             var Collider = PhysicsObject.AddComponent<PolygonCollider2D>();
             var Paths = new Vector2[Positions2D.Count];
             for (int i = 0; i < Positions2D.Count; i++)
             {
-                Paths[i] = new Vector2(Positions2D[i].Item2, Positions2D[i].Item3);
+                Paths[i] = new Vector2(Positions2D[i].Item1, Positions2D[i].Item2);
             }
             if (PhysicsObject.name == "Ship")
             {

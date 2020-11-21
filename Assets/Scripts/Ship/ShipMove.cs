@@ -45,7 +45,7 @@ void Update()
                 newMeteor = true;
                 launchable = true;
                 timeLeft = 2.0f;
-                Destroy(GameObject.Find("MoonPosition"));
+                Destroy(GameObject.Find("Moon"));
                 ScoreText.Reset();
             }
            
@@ -64,7 +64,7 @@ void Update()
                 
                 newMeteor = true;
                 launchable = true;
-                Destroy(GameObject.Find("MoonPosition"));
+                Destroy(GameObject.Find("Moon"));
                 ScoreText.UpdateScore(ref Score);
                 timeLeft = 2.0f;
             }

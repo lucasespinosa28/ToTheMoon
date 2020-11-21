@@ -5,11 +5,10 @@ namespace Assets.Scripts
 {
     public partial class Moon : CreateComponent
     {
-        public static Vector3 StartPosition { get; set; } = new Vector3(8.25f, 0.00f, 00f);
+        public static Vector3 StartPosition { get; set; } = new Vector3(9.00F, 0.00f, 00f);
         public Moon()
         {
-            var MoonPosition = new GameObject("MoonPosition");
-            var Moon = new GameObject("Moon");
+            var moon = new GameObject("Moon");
             var config = new Configurationlines()
             {
                 Color1 = Color.white,
@@ -17,19 +16,11 @@ namespace Assets.Scripts
                 WidthMultiplier = 0.15f
             };
 
-            Lines(Moon, Positions2D, config);
-            Physics(Moon, Positions2D);
-
-            Moon.transform.parent = MoonPosition.transform;
-            MoonPosition.AddComponent<MoonMove>();
-            MoonPosition.transform.position = StartPosition;
-            MoonPosition.transform.localScale = new Vector3(1.5f, 1.5f, 0.0f);
+            Lines(moon, Positions2D, config);
+            Physics(moon, Positions2D);
+            moon.AddComponent<MoonMove>();
+            moon.transform.position = StartPosition;
         }
-        //public GameObject Add()
-        //{
-            
-        //    return MoonPosition;
 
-        //}
     }
 }
