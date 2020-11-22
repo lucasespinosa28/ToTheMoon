@@ -5,10 +5,22 @@ using UnityEngine;
 public class MeteorMove : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float Speed;
+    public (float,float) MinMaxSpeed;
+    public float MinSpeed;
+    private float Speed;
     void Start()
     {
-        Speed = Random.Range(-0.08f, 0.08f);
+        //var Up = Random.Range(MaxSpeed - (MaxSpeed * 2), MaxSpeed);
+       // var Down = Random.Range(MinSpeed - (MinSpeed * 2), MinSpeed);
+       // Speed = Random.Range(MinMaxSpeed.Item1 - (MaxSpeed * 2), MaxSpeed);
+        if (Random.Range(0,10) % 2 == 0)
+        {
+            Speed = Random.Range(MinMaxSpeed.Item1, MinMaxSpeed.Item2);
+        }
+        else
+        {
+            Speed = Random.Range(MinMaxSpeed.Item1 - (MinMaxSpeed.Item1 * 2), MinMaxSpeed.Item2 - (MinMaxSpeed.Item2 * 2)); ;
+        }
     }
     void Update()
     {

@@ -11,7 +11,7 @@ namespace Assets.Scripts
             if (keyPressed)
             {
                 ship.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
-                ship.GetComponent<ConstantForce2D>().force = new Vector2(10, 0);
+                ship.GetComponent<ConstantForce2D>().force = new Vector2(20, 0);
                 launchable = false;
 
             }

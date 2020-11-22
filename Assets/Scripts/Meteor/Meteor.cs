@@ -6,7 +6,7 @@ namespace Assets.Scripts
 {
     public partial class Meteor : CreateComponent
     {
-        public void Add(int Id, Vector3 StartPosition)
+        public void Add(int Id, Vector3 StartPosition,float speedUp)
         {
             var Meteor = new GameObject("Meteor" + Id);
 
@@ -19,8 +19,26 @@ namespace Assets.Scripts
             Lines(Meteor, Positions2D(), MeteorColor);
             Physics(Meteor, Positions2D());
 
-            Meteor.AddComponent<MeteorMove>();
+            var speed = (0.02f* speedUp, 0.02f* speedUp);
+            Meteor.AddComponent<MeteorMove>().MinMaxSpeed = speed;
             Meteor.transform.position = StartPosition;
+
+            //int i = 63;
+
+            //switch (i)
+            //{
+            //    case int n when (n >= 100):
+            //        Debug.Log($"I am 100 or above: {n}");
+            //        break;
+
+            //    case int n when (n < 100 && n >= 50):
+            //        Debug.Log($"I am between 99 and 50: {n}");
+            //        break;
+
+            //    case int n when (n < 50):
+            //        Debug.Log($"I am less than 50: {n}");
+            //        break;
+            //}
 
         }
     }

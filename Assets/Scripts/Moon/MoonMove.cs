@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-    // Start is called before the first frame update
+// Start is called before the first frame update
 public class MoonMove : MonoBehaviour
 {
     private void Update()
@@ -11,11 +11,5 @@ public class MoonMove : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -7.5f, 0.0f);
         }
     }
-
-    private void NewMethod()
-    {
-        
-    }
-    //private static void MoveMoon(GameObject moon) => moon.transform.Translate(translation: Vector3.up * Time.deltaTime);
 }
 

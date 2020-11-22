@@ -28,7 +28,6 @@ namespace Assets.Scripts
             Lines.positionCount = Positions2D.Count;
             for (int i = 0; i < Positions2D.Count; i++)
             {
-                Debug.Log($"{i} {Positions2D[i].Item1}");
                 Lines.SetPosition(i, new Vector3(Positions2D[i].Item1, Positions2D[i].Item2, 0.00f));
             }
             if (DrawObject.name.Contains("Ship")|| DrawObject.name.Contains("Meteor"))

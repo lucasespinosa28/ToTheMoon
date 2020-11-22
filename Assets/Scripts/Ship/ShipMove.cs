@@ -22,6 +22,7 @@ public class ShipMove : MonoBehaviour
 //6 max meteors
 void Update()
     {
+       
         if (newMeteor)
         {
                 new Moon();
@@ -82,7 +83,7 @@ void Update()
         
        
     }
-    private void OnTriggerExit2D(Collider2D hitedGameObjecto)
+    private void OnTriggerEnter2D(Collider2D hitedGameObjecto)
     {
         if (hitedGameObjecto.name.Contains("Meteor"))
         {
@@ -92,14 +93,11 @@ void Update()
             ScoreText.GameOver(ref Score);
             hitMeteor = true;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D hitedGameObjecto)
-    {
         if (hitedGameObjecto.name.Contains("Moon"))
         {
             if (!hitMeteor)
             {
-                Debug.Log("hit moon");             
+
                 gameObject.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.green, Color.green);
                 hitedGameObjecto.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.green, Color.green);
                 hitMoon = true;
