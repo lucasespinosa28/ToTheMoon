@@ -11,7 +11,7 @@ public class ShipMove : MonoBehaviour
     {
         timeLeft = 2.0f;
         launchable = true;
-        Score = 13;
+        Score = 1;
         newMeteor = true;
         hitMeteor = false;
         hitMoon = false;   
