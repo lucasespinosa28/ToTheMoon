@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -10,31 +11,52 @@ namespace Assets.Scripts
         {
             switch (level)
             {
-                case int n when (n <= 3):
-                    NewMethod(level,1);
+                case int n when (n < 3):
+                    new Meteor().Add(0, new Vector3(Random.Range(-5, 7), 0), level);
+                    //AddMeteor(level,1);
                     break;
-                case int n when (n <= 6):
-                    NewMethod(level, 2);
+                case int n when (n < 6):
+                    //AddMeteor(level, 2);
+                    new Meteor().Add(0, new Vector3(Random.Range(-5, -1), 0), level-6 / 10);
+                    new Meteor().Add(1, new Vector3(Random.Range(1, 7), 0), level-6 / 10);
                     break;
-                case int n when (n <= 9):
-                    NewMethod(level, 3);
+                case int n when (n < 9):
+                    //AddMeteor(level, 3);
+                    new Meteor().Add(0, new Vector3(Random.Range(-5, -1), 0), level - 9 / 10);
+                    new Meteor().Add(1, new Vector3(Random.Range(0, 3), 0), level - 9 / 10);
+                    new Meteor().Add(2, new Vector3(Random.Range(4, 7), 0), level - 9 / 10);
                     break;
-                case int n when (n <= 12):
-                    NewMethod(level, 4);
+                case int n when (n < 12):
+                    //AddMeteor(level, 4);
+                    new Meteor().Add(0, new Vector3(Random.Range(-5, -3), 0), level - 12/10);
+                    new Meteor().Add(1, new Vector3(Random.Range(-2, 1), 0), level - 12/10);
+                    new Meteor().Add(2, new Vector3(Random.Range(2, 4), 0), level - 12/10);
+                    new Meteor().Add(3, new Vector3(Random.Range(5, 7), 0), level - 12/10);
                     break;
-                case int n when (n <= 15):
-                    NewMethod(level, 5);
-                    //new Meteor().Add(1, new Vector3(Random.Range(-5.0f, 7.00f), Random.Range(-4.0f, 5.50f)), (level - 12) * 2f);
+                case int n when (n < 15):
+                    new Meteor().Add(0, new Vector3(Random.Range(-5, -4), 0), level - 15/10);
+                    new Meteor().Add(1, new Vector3(Random.Range(-3, -2), 0), level - 15/10);
+                    new Meteor().Add(2, new Vector3(Random.Range(1, 2), 0), level - 15/10);
+                    new Meteor().Add(3, new Vector3(Random.Range(3, 4), 0), level - 15/10);
+                    new Meteor().Add(4, new Vector3(Random.Range(5, 7), 0), level - 15/10);
                     break;
-                
+                case int n when (n >= 15):
+                    new Meteor().Add(0, new Vector3(Random.Range(-5.0f, -4f), 0), level);
+                    new Meteor().Add(1, new Vector3(Random.Range(-3f, -2f), 0), level);
+                    new Meteor().Add(2, new Vector3(Random.Range(-1f, 0f), 0), level);
+                    new Meteor().Add(3, new Vector3(Random.Range(1f, 2f), 0), level);
+                    new Meteor().Add(4, new Vector3(Random.Range(3, 4f), 0), level);
+                    new Meteor().Add(5, new Vector3(Random.Range(5, 7f), 0), level);
+                    break;
+
             }
         }
 
-        private static void NewMethod(int level, int numberMeteors)
+        private static void AddMeteor(int level, int numberMeteors)
         {
             if (numberMeteors == existentMeteor)
             {
-                speedUp += 2f;
+                speedUp += 1.25f;
             }
             else
             {
@@ -44,41 +66,22 @@ namespace Assets.Scripts
             {
                 speedUp = 1f;
             }
-         
-            for (int i = 1; i <= numberMeteors; i++)
-            {           
-                new Meteor().Add(numberMeteors, new Vector3(Random.Range(-5.0f, 7.00f), Random.Range(-4.0f, 5.50f)), speedUp * 2f);                
-                existentMeteor = numberMeteors;
+            var PositionsX = new float[1000];
+            for (int i = 0; i < PositionsX.Length; i++)
+            {
+                PositionsX[i] = Random.Range(-5, 7);
             }
+            var UniquePositionsX = PositionsX.Distinct().ToArray().Take(numberMeteors);
+
+            var meteorId = 0;
+            foreach (var X in UniquePositionsX)
+            {
+                Debug.Log(X+2);
+                new Meteor().Add(meteorId, new Vector3(X, 0), speedUp * 2f);
+                meteorId++;
+            }
+            existentMeteor = numberMeteors;       
+           
         }
     }
 }
-                //switch (n)
-                //{
-                //    case 1:
-                //        new Meteor().Add(1, new Vector3(Random.Range(-5.0f, 7.00f), Random.Range(-4.0f, 5.50f)));
-                //        break;
-                //    case 2:
-                //        new Meteor().Add(1, new Vector3(Random.Range(-5.0f, -1.00f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(2, new Vector3(Random.Range(1.00f, 7.00f), Random.Range(-4.0f, 5.50f)));
-                //        break;
-                //    case 3:
-                //        new Meteor().Add(1, new Vector3(Random.Range(-5.0f, -3.0f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(2, new Vector3(Random.Range(-2.0f, 3.0f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(3, new Vector3(Random.Range(4.0f, 7.0f), Random.Range(-4.0f, 5.50f)));
-                //        break;
-                //    case 4:
-                //        new Meteor().Add(1, new Vector3(Random.Range(-5.0f, -4.0f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(2, new Vector3(Random.Range(-3.0f, 0.0f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(3, new Vector3(Random.Range(1.0f, 3.0f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(4, new Vector3(Random.Range(4.0f, 7.0f), Random.Range(-4.0f, 5.50f)));
-                //        break;
-                //    default:
-                //        new Meteor().Add(1, new Vector3(Random.Range(-5.0f, -2.5f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(2, new Vector3(Random.Range(-3.0f, 0.5f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(3, new Vector3(Random.Range(1.0f, 2.5f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(4, new Vector3(Random.Range(3.0f, 5.5f), Random.Range(-4.0f, 5.50f)));
-                //        new Meteor().Add(5, new Vector3(Random.Range(6.0f, 7.0f), Random.Range(-4.0f, 5.50f)));
-                //        break;
-
-                //}

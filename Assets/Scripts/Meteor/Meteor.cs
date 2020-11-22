@@ -19,7 +19,7 @@ namespace Assets.Scripts
             Lines(Meteor, Positions2D(), MeteorColor);
             Physics(Meteor, Positions2D());
 
-            var speed = (0.02f* speedUp, 0.02f* speedUp);
+            var speed = (0.01f* speedUp, 0.02f* speedUp);
             Meteor.AddComponent<MeteorMove>().MinMaxSpeed = speed;
             Meteor.transform.position = StartPosition;
 

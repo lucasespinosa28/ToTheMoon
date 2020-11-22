@@ -11,16 +11,12 @@ public class ShipMove : MonoBehaviour
     {
         timeLeft = 2.0f;
         launchable = true;
-        Score = 1;
+        Score = 13;
         newMeteor = true;
         hitMeteor = false;
-        hitMoon = false;
-        GameObject.Find("ScoreText").GetComponent<TextMesh>().text = $"STAGE {Score}";
-      
-
+        hitMoon = false;   
     }
-//6 max meteors
-void Update()
+    void Update()
     {
        
         if (newMeteor)
@@ -28,7 +24,6 @@ void Update()
                 new Moon();
             
                 Stages.Level(Score);
-               // new Meteor().AddLegacy(i);
 
             newMeteor = false;
         }
@@ -79,21 +74,31 @@ void Update()
 
         bool DownKey = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
         Ship.Control.Down(DownKey, gameObject, ref launchable);
-        Ship.OffScreen(gameObject,ref hitMeteor,ref hitMeteor,ref Score);
-        
+        Ship.OffScreenVertical(gameObject);
+        if (!hitMoon)
+        {
+            if (Ship.OffScreenHorizontal(gameObject))
+            {
+                hitMeteor = true;
+                ScoreText.GameOver(ref Score);
+            }      
+        }
        
     }
     private void OnTriggerEnter2D(Collider2D hitedGameObjecto)
     {
         if (hitedGameObjecto.name.Contains("Meteor"))
         {
-            gameObject.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.red, Color.red);
-            hitedGameObjecto.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.red, Color.red);
-            Score = 0;
-            ScoreText.GameOver(ref Score);
-            hitMeteor = true;
+            if (!hitMoon)
+            {
+                gameObject.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.red, Color.red);
+                hitedGameObjecto.GetComponent<LineRenderer>().colorGradient = Utils.Gradient(Color.red, Color.red);
+                Score = 0;
+                ScoreText.GameOver(ref Score);
+                hitMeteor = true;
+            }
         }
-        if (hitedGameObjecto.name.Contains("Moon"))
+        if (hitedGameObjecto.name  == "Moon")
         {
             if (!hitMeteor)
             {

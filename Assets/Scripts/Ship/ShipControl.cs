@@ -11,12 +11,12 @@ namespace Assets.Scripts
             if (keyPressed)
             {
                 ship.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
-                ship.GetComponent<ConstantForce2D>().force = new Vector2(20, 0);
+                ship.GetComponent<ConstantForce2D>().force = new Vector2(50, 0);
                 launchable = false;
 
             }
         }
-        public static void OffScreen(GameObject ship,ref bool hitMeteor, ref bool hitMoon,ref int score)
+        public static void OffScreenVertical(GameObject ship)
         {
             var ShipPosition = ship.transform;
             if (ShipPosition.position.y > 6.15)
@@ -27,14 +27,23 @@ namespace Assets.Scripts
             {
                 ShipPosition.position = new Vector3(ShipPosition.position.x, 6.15f, 0.0f);
             }
-            if (!hitMoon)
+        }
+        public static bool OffScreenHorizontal(GameObject ship)
+        {
+            var ShipPosition = ship.transform;
+            if (ShipPosition.position.x > 13f)
             {
-                if (ShipPosition.position.x > 10f)
-                {
-                    ScoreText.GameOver(ref score);         
-                    hitMeteor = true;
-                }
+                return true;
             }
+            else if (ShipPosition.position.x < -11f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+ 
         }
         public class Control
         {
